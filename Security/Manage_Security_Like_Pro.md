@@ -4,18 +4,22 @@ As DevSecOps engineers, one of the primary resposibilities is to maintain securi
 Here are some of the mandatory things to consider.
 
 1. [Secure your API server](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#secure-your-api-server)
-2. [RBAC](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#rbac)
-3. [Network Policies](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#network-policies)
-4. [Encrypt data at rest](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#encrypt-data-at-rest)
-5. [Secure Container Images](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#secure-container-images)
-6. [Cluster Monitoring](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#cluster-monitoring)
-7. [Upgrades](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#upgrades)
+  - API server must be secured : Master and worker nodes, In prod env we have 3 master (to achieve high availablity) and 'n' number of worker nodes
+  - Any command will talk api server, first point of contact
+  - It should be secure, If not kubernetes cluster will be compermized
+  - In kube-apoiserver --> kubernetes-api server pod yaml 
+3. [RBAC](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#rbac)
+4. [Network Policies](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#network-policies)
+5. [Encrypt data at rest](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#encrypt-data-at-rest)
+6. [Secure Container Images](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#secure-container-images)
+7. [Cluster Monitoring](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#cluster-monitoring)
+8. [Upgrades](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#upgrades)
 
 ## Secure your API server
 The Kubernetes API server is a critical component of the cluster and should be secured with strong authentication and authorization mechanisms. 
 Use TLS certificates for all communications with the API server.
 
-1. Enable TLS encryption
+1. Enable TLS encryption : TLS certificates, Basically we can identify by the lock symbol in any website self send certificates, we can purchase from any certification authorities 
 2. Use strong authentication
 3. Restrict access
 4. Monitor and audit
