@@ -7,23 +7,68 @@ Here are some of the mandatory things to consider.
   - API server must be secured : Master and worker nodes, In prod env we have 3 master (to achieve high availablity) and 'n' number of worker nodes
   - Any command will talk api server, first point of contact
   - It should be secure, If not kubernetes cluster will be compermized
-  - In kube-apoiserver --> kubernetes-api server pod yaml 
-3. [RBAC](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#rbac)
-4. [Network Policies](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#network-policies)
-5. [Encrypt data at rest](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#encrypt-data-at-rest)
-6. [Secure Container Images](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#secure-container-images)
-7. [Cluster Monitoring](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#cluster-monitoring)
-8. [Upgrades](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#upgrades)
+  - In kube-apoiserver --> kubernetes-api server pod yaml
+    
+2. [RBAC](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#rbac)
+![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/95c8f686-8717-4091-ba07-b111409f14d5)
+
+  - Using RBAC we can restrict the access --> done by service-account, role and role binding
+  - For specific USER we create a cluster role or a simple role --> inside the resouces we can mention like this USER having access to the pods and we have to provide namespace of the pod
+  - The USER will be able to get watch and list the pods
+  - Using RBAC we can also limit the access to kubernetes server
+  - ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/eb9854dc-9728-4450-9075-6ae94410d4ca)
+
+3. [Network Policies](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#network-policies)
+  -  ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/92f17d4b-bbce-4959-a966-718310dd266f)
+
+  - We can access the namespace (particular namespace) be'coz we have configured a network policy no body should we able to access
+  - limiting the access to the specific namespace 
+4. [Encrypt data at rest](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#encrypt-data-at-rest)
+  - ETCD key values kuberntes objects store
+  - It stores the sensitive info, configmaps, secrets (ex: pods requires secrets, tls cret, encryption key, api key)
+  - ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/c5e54bce-3581-4fae-bb0f-863c3ed52335)
+  - All the access to secrets are give to right people in your organization using RBAC
+  - iF Hacker tries to access SECRETS as we have used RBAC so it is not possible, we will try to access ETCD
+  - ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/da4db0c1-0a8b-4a06-bc97-40cd83f0e8d7)
+  - We have secure the information in ETCD, When ever a secret is getting saved in ETCD in btween there is an ENCRYPTION mechanism
+  - Only the people have DECRYPTION key will handle the secrets are read the secrets
+
+5. [Secure Container Images](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#secure-container-images)
+  - What if we have VULNERABILITY in the container images
+  - ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/544a8477-5073-4280-a936-eb6c14817287)
+  - ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/b98bf06e-ca50-4b7e-a791-1299693be053)
+  - As DEVSECOPS enginner we have to use tools like SYNk in CI/CD pipeline (docker synk container-image-location) use ``` docker synk --severity high <container-image-location> <tag>
+  - DOCKER image scan tool like QUAY.IO, SYNK, CLAIR, TRIVY as docker images scann tools
+
+6. [Cluster Monitoring](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#cluster-monitoring)
+   ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/62c9c25a-1e4a-480a-bf27-15d152683119)
+
+  - Dev created pod in kubernetes and he is trying to access /etc/shadow (very secret file - nobody should access)
+  - a user using sudo and he is accessing the file called /etc/shadow
+  - He got some sensitive information and he is trying to save in his LOCAl machine (can be a hacker as well)
+  - No conatiner should be running as root user -- it will create problem
+  - How do we monitor this LIKE this activity and get notified
+  - we have best cluster monitoring tools like SYSDIG - open source it runs as a daemon -set
+  - it will do clsuter monitoring and it will identify some AI/ML rules
+    
+7 [Upgrades](https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero/blob/main/Security/Manage_Security_Like_Pro.md#upgrades)
+  ![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/8c9dcd3a-cee8-4ee6-b362-427ad21b920f)
+  - Contants upgrades -- keep to date
 
 ## Secure your API server
 The Kubernetes API server is a critical component of the cluster and should be secured with strong authentication and authorization mechanisms. 
 Use TLS certificates for all communications with the API server.
 
-1. Enable TLS encryption : TLS certificates, Basically we can identify by the lock symbol in any website self send certificates, we can purchase from any certification authorities 
-2. Use strong authentication
-3. Restrict access
-4. Monitor and audit
-5. Keep the API server up to date
+![image](https://github.com/pavankumar0077/Secure-Kubernetes/assets/40380941/9ff9dc6f-40ef-46e4-b310-7a81c66b8b32)
+
+1. Enable TLS encryption : TLS certificates, Basically we can identify by the lock symbol in any website self sign certificates, we can purchase from any certification authorities
+  - Find the pod kuber-apiserver it will be in kubesystem namespace ``` kubectl get pods -A ```
+  - Edit the kube-apiserver --> we will pass spec: containers: - tls-certificate-file - private-key - client
+  - X509 is the self sign certificate 
+3. Use strong authentication
+4. Restrict access
+5. Monitor and audit
+6. Keep the API server up to date
 
 #### Enable TLS encryption
 
