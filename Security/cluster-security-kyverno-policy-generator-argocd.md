@@ -1,8 +1,8 @@
 # ENFORE AUTOMATED K8s CLUSTER SECURITY USING KYNERNO POLICY GENERATOR AND ARGOCD
 
-REF LINK 1 : https://github.com/iam-veeramalla/k8s-kyverno-argocd
-REF LINK 2 : https://kyverno.io/
-REF LINK 3 : https://github.com/kyverno/policies/tree/main/best-practices
+1) REF LINK 1 : https://github.com/iam-veeramalla/k8s-kyverno-argocd
+2) REF LINK 2 : https://kyverno.io/
+3) REF LINK 3 : https://github.com/kyverno/policies/tree/main/best-practices
 
 - In Organizations generally we have very huge amount of MIRCOSERVICES
 - There are development teams dedicated for these MICROSERVICES, Like namespace - A (logging) namespace -B (payments) namespace -C (DB) and etc
