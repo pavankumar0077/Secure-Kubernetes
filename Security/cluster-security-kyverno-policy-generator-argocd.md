@@ -34,3 +34,8 @@ Problem statement
 - KYVERNO is Dynamic Admission Controller which is solving this problem for Devops Engineer
 - Read our request and create configuration accordingly
 - It will read the policy -- KYVERNO Controller
+
+## Write the Kyverno Policy
+- ``` kubectl apply -f https://raw.githubusercontent.com/kyverno/policies/main/best-practices/require-pod-requests-limits/require-pod-requests-limits.yaml ``` to deploy the policy for  REQUIRE POD REQUEST
+- ``` kubectl logs kyverno-c59cdd4bf-vm554 -n kyverno ``` TO logs find the kyverno by namespace and find the deployment and check for logs
+- ``` kubectl get pods -o wide -n kyverno ``` or check for pods whether pods are created or not as per policy
